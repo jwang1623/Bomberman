@@ -138,7 +138,6 @@ public class Bomberman extends JFrame implements ActionListener {
 					Bomb.off();
 				}
 			}
-
 			else
 				Bomb.setExplode(false);
 
