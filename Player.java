@@ -2,25 +2,25 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-public class Character {
+public class Player {
 	private static int x = 0;
 	private static int y = 0;
 	private static int speed = 7;
 	private static boolean dead = false;
-	private static Image character = (new ImageIcon("characterSteady.png")).getImage();
-	private static Image characterUp = (new ImageIcon("characterUp.gif")).getImage();
-	private static Image characterDown = (new ImageIcon("characterDown.gif")).getImage();
-	private static Image characterRight = (new ImageIcon("characterRight.gif")).getImage();
-	private static Image characterLeft = (new ImageIcon("characterLeft.gif")).getImage();
-	private static Image characterSteady = (new ImageIcon("characterSteady.png")).getImage();
-	private static Image characterDead = (new ImageIcon("characterDead(1.8).gif")).getImage();
+	private static Image player = (new ImageIcon("playerSteady.png")).getImage();
+	private static Image playerUp = (new ImageIcon("playerUp.gif")).getImage();
+	private static Image playerDown = (new ImageIcon("playerDown.gif")).getImage();
+	private static Image playerRight = (new ImageIcon("playerRight.gif")).getImage();
+	private static Image playerLeft = (new ImageIcon("playerLeft.gif")).getImage();
+	private static Image playerSteady = (new ImageIcon("playerSteady.png")).getImage();
+	private static Image playerDead = (new ImageIcon("playerDead.gif")).getImage();
 
 	public static boolean isDead() {
 		return dead;
 	}
 
 	public static void setDead(boolean dead) {
-		Character.dead = dead;
+		Player.dead = dead;
 	}
 
 	public static boolean meetDoor() {
@@ -34,43 +34,43 @@ public class Character {
 		return state;
 	}
 
-	public static boolean meetBang() {
+	public static boolean meetExplode() {
 		boolean state = false;
 		boolean west, east, north, south;
 
-		if (Bomb.getBang1X() > 0 && Bomb.getBang1Y() > 0) {
-			west = x - Bomb.getBang1X() < 35;
-			east = Bomb.getBang1X() - x < 35;
-			north = Bomb.getBang1Y() - y < 35;
-			south = y - Bomb.getBang1Y() < 35;
+		if (Bomb.getExplode1X() > 0 && Bomb.getExplode1Y() > 0) {
+			west = x - Bomb.getExplode1X() < 35;
+			east = Bomb.getExplode1X() - x < 35;
+			north = Bomb.getExplode1Y() - y < 35;
+			south = y - Bomb.getExplode1Y() < 35;
 			state = state || (west && south && north && east);
 		}
-		if (Bomb.getBang2X() >= 0 && Bomb.getBang2Y() >= 0) {
-			west = x - Bomb.getBang2X() < 35;
-			east = Bomb.getBang2X() - x < 35;
-			north = Bomb.getBang2Y() - y < 35;
-			south = y - Bomb.getBang2Y() < 35;
+		if (Bomb.getExplode2X() >= 0 && Bomb.getExplode2Y() >= 0) {
+			west = x - Bomb.getExplode2X() < 35;
+			east = Bomb.getExplode2X() - x < 35;
+			north = Bomb.getExplode2Y() - y < 35;
+			south = y - Bomb.getExplode2Y() < 35;
 			state = state || (west && south && north && east);
 		}
-		if (Bomb.getBang3X() >= 0 && Bomb.getBang3Y() >= 0) {
-			west = x - Bomb.getBang3X() < 35;
-			east = Bomb.getBang3X() - x < 35;
-			north = Bomb.getBang3Y() - y < 35;
-			south = y - Bomb.getBang3Y() < 35;
+		if (Bomb.getExplode3X() >= 0 && Bomb.getExplode3Y() >= 0) {
+			west = x - Bomb.getExplode3X() < 35;
+			east = Bomb.getExplode3X() - x < 35;
+			north = Bomb.getExplode3Y() - y < 35;
+			south = y - Bomb.getExplode3Y() < 35;
 			state = state || (west && south && north && east);
 		}
-		if (Bomb.getBang4X() > 0 && Bomb.getBang4Y() > 0) {
-			west = x - Bomb.getBang4X() < 35;
-			east = Bomb.getBang4X() - x < 35;
-			north = Bomb.getBang4Y() - y < 35;
-			south = y - Bomb.getBang4Y() < 35;
+		if (Bomb.getExplode4X() > 0 && Bomb.getExplode4Y() > 0) {
+			west = x - Bomb.getExplode4X() < 35;
+			east = Bomb.getExplode4X() - x < 35;
+			north = Bomb.getExplode4Y() - y < 35;
+			south = y - Bomb.getExplode4Y() < 35;
 			state = state || (west && south && north && east);
 		}
-		if (Bomb.getBang5X() > 0 && Bomb.getBang5Y() > 0) {
-			west = x - Bomb.getBang5X() < 35;
-			east = Bomb.getBang5X() - x < 35;
-			north = Bomb.getBang5Y() - y < 35;
-			south = y - Bomb.getBang5Y() < 35;
+		if (Bomb.getExplode5X() > 0 && Bomb.getExplode5Y() > 0) {
+			west = x - Bomb.getExplode5X() < 35;
+			east = Bomb.getExplode5X() - x < 35;
+			north = Bomb.getExplode5Y() - y < 35;
+			south = y - Bomb.getExplode5Y() < 35;
 			state = state || (west && south && north && east);
 		}
 		return state;
@@ -143,32 +143,32 @@ public class Character {
 	}
 
 	public static void setSpeed(int speed) {
-		Character.speed = speed;
+		Player.speed = speed;
 	}
 
-	public static Image getCharacter() {
-		return character;
+	public static Image getPlayer() {
+		return player;
 	}
 
-	public static void setCharacter(int ch) {
+	public static void setPlayer(int ch) {
 		switch (ch) {
 		case 1:
-			character = characterUp;
+			player = playerUp;
 			break;
 		case 2:
-			character = characterDown;
+			player = playerDown;
 			break;
 		case 3:
-			character = characterRight;
+			player = playerRight;
 			break;
 		case 4:
-			character = characterLeft;
+			player = playerLeft;
 			break;
 		case 5:
-			character = characterSteady;
+			player = playerSteady;
 			break;
 		case 6:
-			character = characterDead;
+			player = playerDead;
 			break;
 		}
 	}
@@ -178,7 +178,7 @@ public class Character {
 	}
 
 	public static void setX(int x) {
-		Character.x = x;
+		Player.x = x;
 	}
 
 	public static int getY() {
@@ -186,7 +186,7 @@ public class Character {
 	}
 
 	public static void setY(int y) {
-		Character.y = y;
+		Player.y = y;
 	}
 
 }
