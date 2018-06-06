@@ -1,22 +1,27 @@
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Game extends JFrame implements ActionListener {
+public class Bomberman extends JFrame implements ActionListener {
 
+	private static int sizex = 755, sizey = 580;
+	private static JFrame mainFrame;
+	private static JFrame howFrame;
+	private static JLabel headerLabel;
+   	private static JPanel controlPanel;
 	private Image wall = (new ImageIcon("wall.png")).getImage();
 	private Image door = (new ImageIcon("door.png")).getImage();
-	private Enemy[] enemy = new Enemy[2];
+	private Enemy[] enemy = new Enemy[3];
 	private Timer time;
 	private long periodBomb = 0, periodExplode = 0, periodEnemyDead = 0, periodDead = 0;
 	private Image won = (new ImageIcon("playerWon.gif")).getImage();
 
-	public Game() {
-		//System.out.println((int)(Math.ceil((1 + Math.random() * 1))));
+	public Bomberman() {
 		for (int i = 0; i < enemy.length; i++)
 			enemy[i] = new Enemy();
 		addKeyListener(new XListener());
@@ -25,15 +30,74 @@ public class Game extends JFrame implements ActionListener {
 	}
 
 	public static void main(String args[]) {
-		Game game = new Game();
-		game.setTitle("Bomberman");
-		game.setSize(755, 580);
-		game.setLocationRelativeTo(null);
-		game.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		game.setResizable(false);
-		game.setVisible(true);
-		game.time.start();
+
+		mainFrame = new JFrame("Bomberman");
+        mainFrame.setSize(sizex, sizey);
+        mainFrame.setLayout(new GridLayout(3, 1));
+
+        headerLabel = new JLabel("",JLabel.CENTER );
+
+        mainFrame.addWindowListener(new WindowAdapter() {
+           public void windowClosing(WindowEvent windowEvent){
+              System.exit(0);
+           }
+        });
+        controlPanel = new JPanel();
+        controlPanel.setLayout(new FlowLayout());
+
+        mainFrame.add(headerLabel);
+        mainFrame.add(controlPanel);
+
+        headerLabel.setText("Welcome to Bomberman Game!");
+
+        JButton playButton = new JButton("Play");
+        JButton howToPlayButton = new JButton("How to Play");
+
+        playButton.setActionCommand("Play");
+        howToPlayButton.setActionCommand("How to Play");
+
+        playButton.addActionListener(new ButtonClickListener());
+        howToPlayButton.addActionListener(new ButtonClickListener());
+
+        controlPanel.add(playButton);
+        controlPanel.add(howToPlayButton);
+
+        mainFrame.setVisible(true);
+        playButton.setOpaque(true);
+        howToPlayButton.setOpaque(true);
+
+
 	}
+
+	//directs user to appropriate window based on button click
+    private static class ButtonClickListener implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+           String command = e.getActionCommand();
+           if (command.equals("Play")) {
+                Bomberman game = new Bomberman();
+				game.setTitle("Bomberman");
+				game.setSize(sizex, sizey);
+				game.setDefaultCloseOperation(EXIT_ON_CLOSE);
+				game.setVisible(true);
+				mainFrame.setVisible(false);
+				game.time.start();
+           }
+           else if (command.equals("How to Play")) {
+                displayHow();
+           }
+        }
+    }
+
+    //displays instructions to play the game
+    private static void displayHow() {
+         //probably should set like a layout manager or smth. oh boy
+         howFrame = new JFrame("How to Play"); //should i make this a global variable like mainFrame?
+         howFrame.setSize(sizex, sizey);
+         JLabel howLabel = new JLabel("",JLabel.CENTER );
+         howLabel.setText("<html>Use arrow keys to move the bomberman.<br>Press spacebar to drop a bomb.<br>Kill all the enemies and make it to the door to win!</html>");
+         howFrame.add(howLabel);
+         howFrame.setVisible(true);
+    }
 
 	class GamePanel extends JPanel {
 
@@ -55,7 +119,7 @@ public class Game extends JFrame implements ActionListener {
 				if (System.currentTimeMillis() - periodDead > 1000) {
 					time.stop();
 					g.setColor(Color.red);
-					g.drawString("Game Over!!", getWidth() / 2 - 100,
+					g.drawString("You Lose :(", getWidth() / 2 - 100,
 						getHeight() / 2 - 20);
 					return;
 				}
