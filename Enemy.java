@@ -80,43 +80,43 @@ public class Enemy {
 		return state;
 	}
 
-	public boolean meetBang() {
+	public boolean meetExplode() {
 		boolean state = false;
 		boolean west, east, north, south;
 
-		if (Bomb.getBang1X() > 0 && Bomb.getBang1Y() > 0) {
-			west = x - Bomb.getBang1X() < 35;
-			east = Bomb.getBang1X() - x < 35;
-			north = Bomb.getBang1Y() - y < 35;
-			south = y - Bomb.getBang1Y() < 35;
+		if (Bomb.getExplode1X() > 0 && Bomb.getExplode1Y() > 0) {
+			west = x - Bomb.getExplode1X() < 35;
+			east = Bomb.getExplode1X() - x < 35;
+			north = Bomb.getExplode1Y() - y < 35;
+			south = y - Bomb.getExplode1Y() < 35;
 			state = state || (west && south && north && east);
 		}
-		if (Bomb.getBang2X() >= 0 && Bomb.getBang2Y() >= 0) {
-			west = x - Bomb.getBang2X() < 35;
-			east = Bomb.getBang2X() - x < 35;
-			north = Bomb.getBang2Y() - y < 35;
-			south = y - Bomb.getBang2Y() < 35;
+		if (Bomb.getExplode2X() >= 0 && Bomb.getExplode2Y() >= 0) {
+			west = x - Bomb.getExplode2X() < 35;
+			east = Bomb.getExplode2X() - x < 35;
+			north = Bomb.getExplode2Y() - y < 35;
+			south = y - Bomb.getExplode2Y() < 35;
 			state = state || (west && south && north && east);
 		}
-		if (Bomb.getBang3X() >= 0 && Bomb.getBang3Y() >= 0) {
-			west = x - Bomb.getBang3X() < 35;
-			east = Bomb.getBang3X() - x < 35;
-			north = Bomb.getBang3Y() - y < 35;
-			south = y - Bomb.getBang3Y() < 35;
+		if (Bomb.getExplode3X() >= 0 && Bomb.getExplode3Y() >= 0) {
+			west = x - Bomb.getExplode3X() < 35;
+			east = Bomb.getExplode3X() - x < 35;
+			north = Bomb.getExplode3Y() - y < 35;
+			south = y - Bomb.getExplode3Y() < 35;
 			state = state || (west && south && north && east);
 		}
-		if (Bomb.getBang4X() > 0 && Bomb.getBang4Y() > 0) {
-			west = x - Bomb.getBang4X() < 35;
-			east = Bomb.getBang4X() - x < 35;
-			north = Bomb.getBang4Y() - y < 35;
-			south = y - Bomb.getBang4Y() < 35;
+		if (Bomb.getExplode4X() > 0 && Bomb.getExplode4Y() > 0) {
+			west = x - Bomb.getExplode4X() < 35;
+			east = Bomb.getExplode4X() - x < 35;
+			north = Bomb.getExplode4Y() - y < 35;
+			south = y - Bomb.getExplode4Y() < 35;
 			state = state || (west && south && north && east);
 		}
-		if (Bomb.getBang5X() > 0 && Bomb.getBang5Y() > 0) {
-			west = x - Bomb.getBang5X() < 35;
-			east = Bomb.getBang5X() - x < 35;
-			north = Bomb.getBang5Y() - y < 35;
-			south = y - Bomb.getBang5Y() < 35;
+		if (Bomb.getExplode5X() > 0 && Bomb.getExplode5Y() > 0) {
+			west = x - Bomb.getExplode5X() < 35;
+			east = Bomb.getExplode5X() - x < 35;
+			north = Bomb.getExplode5Y() - y < 35;
+			south = y - Bomb.getExplode5Y() < 35;
 			state = state || (west && south && north && east);
 		}
 		return state;

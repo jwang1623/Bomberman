@@ -12,7 +12,7 @@ public class Game extends JFrame implements ActionListener {
 	private Image door = (new ImageIcon("door.png")).getImage();
 	private Enemy[] enemy = new Enemy[2];
 	private Timer time;
-	private long periodBomb = 0, periodBang = 0, periodEnemyDead = 0, periodDead = 0;
+	private long periodBomb = 0, periodExplode = 0, periodEnemyDead = 0, periodDead = 0;
 
 	public Game() {
 		//System.out.println((int)(Math.ceil((1 + Math.random() * 1))));
@@ -44,14 +44,14 @@ public class Game extends JFrame implements ActionListener {
 			super.paintComponent(g);
 
 			g.setFont(new Font("Helvetica", Font.BOLD, 80));
-			if (Character.meetDoor() && Enemy.allEnemiesDead(enemy)) {
+			if (Player.meetDoor() && Enemy.allEnemiesDead(enemy)) {
 				time.stop();
 				g.setColor(Color.BLACK);
 				g.drawString("Well Done!!", getWidth() / 2 - 100,
 					getHeight() / 2 - 20);
 				return;
 			}
-			if (Character.isDead()) {
+			if (Player.isDead()) {
 				if (System.currentTimeMillis() - periodDead > 1000) {
 					time.stop();
 					g.setColor(Color.red);
@@ -59,26 +59,26 @@ public class Game extends JFrame implements ActionListener {
 						getHeight() / 2 - 20);
 					return;
 				}
-				Character.setCharacter(6);
+				Player.setPlayer(6);
 			}
 			g.drawImage(door, 700, 500, 50, 50, null);
 			
-			if (Bomb.isBang() && (System.currentTimeMillis() - periodBang < 1000))
-				Bomb.BangEvent(g);
+			if (Bomb.isExplode() && (System.currentTimeMillis() - periodExplode < 1000))
+				Bomb.ExplodeEvent(g);
 
 			else if (Bomb.isBombSet()) {
 				g.drawImage(Bomb.getBomb(), Bomb.getX(), Bomb.getY(), 35, 35, null);
 				if (System.currentTimeMillis() - periodBomb > 3000) {
-					periodBang = System.currentTimeMillis();
-					Bomb.setBang(true);
+					periodExplode = System.currentTimeMillis();
+					Bomb.setExplode(true);
 					Bomb.off();
 				}
 			}
 
 			else
-				Bomb.setBang(false);
+				Bomb.setExplode(false);
 
-			g.drawImage(Character.getCharacter(), Character.getX(), Character.getY(), 35, 35, null);
+			g.drawImage(Player.getPlayer(), Player.getX(), Player.getY(), 35, 35, null);
 			for (int i = 0; i < enemy.length; i++) {
 				if ((enemy[i].isDead() && System.currentTimeMillis() - periodEnemyDead > 1200)) {
 					enemy[i].setX(1000);
@@ -95,69 +95,69 @@ public class Game extends JFrame implements ActionListener {
 	class XListener implements KeyListener {
 		@Override
 		public void keyPressed(KeyEvent e) {
-			if (Character.isDead() || (Character.meetDoor() && Enemy.allEnemiesDead(enemy)))
+			if (Player.isDead() || (Player.meetDoor() && Enemy.allEnemiesDead(enemy)))
 				return;
-			if (Character.meetBomb() && Bomb.isBombSet()) {
+			if (Player.meetBomb() && Bomb.isBombSet()) {
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_UP:
-					Character.moveUp();
-					Character.setCharacter(1);
-					if (Character.meetWall() || Character.outOfPanel())
-						Character.moveDown();
+					Player.moveUp();
+					Player.setPlayer(1);
+					if (Player.meetWall() || Player.outOfPanel())
+						Player.moveDown();
 					break;
 				case KeyEvent.VK_DOWN:
-					Character.setCharacter(2);
-					Character.moveDown();
-					if (Character.meetWall() || Character.outOfPanel())
-						Character.moveUp();
+					Player.setPlayer(2);
+					Player.moveDown();
+					if (Player.meetWall() || Player.outOfPanel())
+						Player.moveUp();
 					break;
 				case KeyEvent.VK_RIGHT:
-					Character.setCharacter(3);
-					Character.moveRight();
-					if (Character.meetWall() || Character.outOfPanel())
-						Character.moveLeft();
+					Player.setPlayer(3);
+					Player.moveRight();
+					if (Player.meetWall() || Player.outOfPanel())
+						Player.moveLeft();
 					break;
 				case KeyEvent.VK_LEFT:
-					Character.setCharacter(4);
-					Character.moveLeft();
-					if (Character.meetWall() || Character.outOfPanel())
-						Character.moveRight();
+					Player.setPlayer(4);
+					Player.moveLeft();
+					if (Player.meetWall() || Player.outOfPanel())
+						Player.moveRight();
 					break;
 				}
 			} else
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_UP:
-					Character.moveUp();
-					Character.setCharacter(1);
-					if (Character.meetWall() || Character.outOfPanel()
-							|| Character.meetBomb() && Bomb.isBombSet())
-						Character.moveDown();
+					Player.moveUp();
+					Player.setPlayer(1);
+					if (Player.meetWall() || Player.outOfPanel()
+							|| Player.meetBomb() && Bomb.isBombSet())
+						Player.moveDown();
 					break;
 				case KeyEvent.VK_DOWN:
-					Character.setCharacter(2);
-					Character.moveDown();
-					if (Character.meetWall() || Character.outOfPanel()
-							|| Character.meetBomb() && Bomb.isBombSet())
-						Character.moveUp();
+					Player.setPlayer(2);
+					Player.moveDown();
+					if (Player.meetWall() || Player.outOfPanel()
+							|| Player.meetBomb() && Bomb.isBombSet())
+						Player.moveUp();
 					break;
 				case KeyEvent.VK_RIGHT:
-					Character.setCharacter(3);
-					Character.moveRight();
-					if (Character.meetWall() || Character.outOfPanel()
-							|| Character.meetBomb() && Bomb.isBombSet())
-						Character.moveLeft();
+					Player.setPlayer(3);
+					Player.moveRight();
+					if (Player.meetWall() || Player.outOfPanel()
+							|| Player.meetBomb() && Bomb.isBombSet())
+						Player.moveLeft();
 					break;
 				case KeyEvent.VK_LEFT:
-					Character.setCharacter(4);
-					Character.moveLeft();
-					if (Character.meetWall() || Character.outOfPanel()
-							|| Character.meetBomb() && Bomb.isBombSet())
-						Character.moveRight();
+					Player.setPlayer(4);
+					Player.moveLeft();
+					if (Player.meetWall() || Player.outOfPanel()
+							|| Player.meetBomb() && Bomb.isBombSet())
+						Player.moveRight();
 					break;
 				case KeyEvent.VK_SPACE:
-					if (!Bomb.isBombSet() && !Bomb.isBang()) {
-						Bomb.setX(Character.getX());
-						Bomb.setY(Character.getY());
+					if (!Bomb.isBombSet() && !Bomb.isExplode()) {
+						Bomb.setX(Player.getX());
+						Bomb.setY(Player.getY());
 						Bomb.on();
 						periodBomb = System.currentTimeMillis();
 					}
@@ -167,7 +167,7 @@ public class Game extends JFrame implements ActionListener {
 		}
 
 		public void keyReleased(KeyEvent e) {
-			Character.setCharacter(5);
+			Player.setPlayer(5);
 			repaint();
 		}
 
@@ -180,15 +180,15 @@ public class Game extends JFrame implements ActionListener {
 
 		for (int i = 0; i < enemy.length; i++) {
 			enemy[i].move(i % 2 == 1);
-			if (enemy[i].meetBang() && Bomb.isBang()) {
+			if (enemy[i].meetExplode() && Bomb.isExplode()) {
 				enemy[i].setEnemy(enemy[i].getEnemyDead());
 				enemy[i].setDead(true);
 				periodEnemyDead = System.currentTimeMillis();
 			}
 		}
 
-		if (Character.meetEnemy(enemy) || (Character.meetBang() && Bomb.isBang())) {
-			Character.setDead(true);
+		if (Player.meetEnemy(enemy) || (Player.meetExplode() && Bomb.isExplode())) {
+			Player.setDead(true);
 			periodDead = System.currentTimeMillis();
 		}
 		repaint();

@@ -6,22 +6,22 @@ import javax.swing.ImageIcon;
 public class Bomb {
 	private static int x = -300;
 	private static int y = -300;
-	private static boolean bang = false;
-	private static Image bomb = (new ImageIcon("bomb(1).gif")).getImage();
-	private static Image bang1 = (new ImageIcon("bang1.gif")).getImage();
-	private static Image bang2 = (new ImageIcon("bang2.gif")).getImage();
-	private static Image bang3 = (new ImageIcon("bang3.gif")).getImage();
-	private static Image bang4 = (new ImageIcon("bang4.gif")).getImage();
-	private static Image bang5 = (new ImageIcon("bang5.gif")).getImage();
+	private static boolean explode = false;
+	private static Image bomb = (new ImageIcon("bomb.gif")).getImage();
+	private static Image explode1 = (new ImageIcon("explode1.gif")).getImage();
+	private static Image explode2 = (new ImageIcon("explode2.gif")).getImage();
+	private static Image explode3 = (new ImageIcon("explode3.gif")).getImage();
+	private static Image explode4 = (new ImageIcon("explode4.gif")).getImage();
+	private static Image explode5 = (new ImageIcon("explode5.gif")).getImage();
 	private static boolean bombSet = false;
-	private static int bang1X, bang2X, bang3X, bang4X, bang5X, bang1Y, bang2Y, bang3Y, bang4Y, bang5Y;
+	private static int explode1X, explode2X, explode3X, explode4X, explode5X, explode1Y, explode2Y, explode3Y, explode4Y, explode5Y;
 
-	public static boolean isBang() {
-		return bang;
+	public static boolean isExplode() {
+		return explode;
 	}
 
-	public static void setBang(boolean bang) {
-		Bomb.bang = bang;
+	public static void setExplode(boolean explode) {
+		Bomb.explode = explode;
 	}
 
 	public static boolean isBombSet() {
@@ -44,12 +44,12 @@ public class Bomb {
 		return x;
 	}
 
-	public static void BangEvent(Graphics g) {
-		g.drawImage(bang1, bang1X, bang1Y, 35, 35, null);
-		g.drawImage(bang2, bang2X, bang2Y, 58, 35, null);
-		g.drawImage(bang3, bang3X, bang3Y, 35, 58, null);
-		g.drawImage(bang4, bang4X, bang4Y, 58, 35, null);
-		g.drawImage(bang5, bang5X, bang5Y, 35, 58, null);
+	public static void ExplodeEvent(Graphics g) {
+		g.drawImage(explode1, explode1X, explode1Y, 35, 35, null);
+		g.drawImage(explode2, explode2X, explode2Y, 58, 35, null);
+		g.drawImage(explode3, explode3X, explode3Y, 35, 58, null);
+		g.drawImage(explode4, explode4X, explode4Y, 58, 35, null);
+		g.drawImage(explode5, explode5X, explode5Y, 35, 58, null);
 	}
 
 	public static void setX(int x) {
@@ -62,11 +62,11 @@ public class Bomb {
 			x--;
 		Bomb.x = x;
 
-		bang1X = Bomb.x;
-		bang2X = Bomb.x - 58;
-		bang3X = Bomb.x;
-		bang4X = Bomb.x + 35;
-		bang5X = Bomb.x;
+		explode1X = Bomb.x;
+		explode2X = Bomb.x - 58;
+		explode3X = Bomb.x;
+		explode4X = Bomb.x + 35;
+		explode5X = Bomb.x;
 
 	}
 
@@ -84,11 +84,11 @@ public class Bomb {
 			y--;
 		Bomb.y = y;
 
-		bang1Y = Bomb.y;
-		bang2Y = Bomb.y;
-		bang3Y = Bomb.y - 58;
-		bang4Y = Bomb.y;
-		bang5Y = Bomb.y + 35;
+		explode1Y = Bomb.y;
+		explode2Y = Bomb.y;
+		explode3Y = Bomb.y - 58;
+		explode4Y = Bomb.y;
+		explode5Y = Bomb.y + 35;
 	}
 
 	public static Image getBomb() {
@@ -99,84 +99,84 @@ public class Bomb {
 		Bomb.bomb = bomb;
 	}
 
-	public static Image getBang1() {
-		return bang1;
+	public static Image getExplode1() {
+		return explode1;
 	}
 
-	public static void setBang1(Image bang1) {
-		Bomb.bang1 = bang1;
+	public static void setExplode1(Image explode1) {
+		Bomb.explode1 = explode1;
 	}
 
-	public static Image getBang2() {
-		return bang2;
+	public static Image getExplode2() {
+		return explode2;
 	}
 
-	public static void setBang2(Image bang2) {
-		Bomb.bang2 = bang2;
+	public static void setExplode2(Image explode2) {
+		Bomb.explode2 = explode2;
 	}
 
-	public static Image getBang3() {
-		return bang3;
+	public static Image getExplode3() {
+		return explode3;
 	}
 
-	public static void setBang3(Image bang3) {
-		Bomb.bang3 = bang3;
+	public static void setExplode3(Image explode3) {
+		Bomb.explode3 = explode3;
 	}
 
-	public static Image getBang4() {
-		return bang4;
+	public static Image getExplode4() {
+		return explode4;
 	}
 
-	public static void setBang4(Image bang4) {
-		Bomb.bang4 = bang4;
+	public static void setExplode4(Image explode4) {
+		Bomb.explode4 = explode4;
 	}
 
-	public static Image getBang5() {
-		return bang5;
+	public static Image getExplode5() {
+		return explode5;
 	}
 
-	public static void setBang5(Image bang5) {
-		Bomb.bang5 = bang5;
+	public static void setExplode5(Image explode5) {
+		Bomb.explode5 = explode5;
 	}
 
-	public static int getBang1X() {
-		return bang1X;
+	public static int getExplode1X() {
+		return explode1X;
 	}
 
-	public static int getBang2X() {
-		return bang2X;
+	public static int getExplode2X() {
+		return explode2X;
 	}
 
-	public static int getBang3X() {
-		return bang3X;
+	public static int getExplode3X() {
+		return explode3X;
 	}
 
-	public static int getBang4X() {
-		return bang4X;
+	public static int getExplode4X() {
+		return explode4X;
 	}
 
-	public static int getBang5X() {
-		return bang5X;
+	public static int getExplode5X() {
+		return explode5X;
 	}
 
-	public static int getBang1Y() {
-		return bang1Y;
+	public static int getExplode1Y() {
+		return explode1Y;
 	}
 
-	public static int getBang2Y() {
-		return bang2Y;
+	public static int getExplode2Y() {
+		return explode2Y;
 	}
 
-	public static int getBang3Y() {
-		return bang3Y;
+	public static int getExplode3Y() {
+		return explode3Y;
 	}
 
-	public static int getBang4Y() {
-		return bang4Y;
+	public static int getExplode4Y() {
+		return explode4Y;
 	}
 
-	public static int getBang5Y() {
-		return bang5Y;
+	public static int getExplode5Y() {
+		return explode5Y;
 	}
 
 }
