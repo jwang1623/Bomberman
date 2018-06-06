@@ -44,7 +44,7 @@ public class Bomb {
 		return x;
 	}
 
-	public static void ExplodeEvent(Graphics g) {
+	public static void ExplodeEvent(Graphics g) {//explosion in 4 different directions, lenght 58 & at center
 		g.drawImage(explode1, explode1X, explode1Y, 35, 35, null);
 		g.drawImage(explode2, explode2X, explode2Y, 58, 35, null);
 		g.drawImage(explode3, explode3X, explode3Y, 35, 58, null);
@@ -53,20 +53,20 @@ public class Bomb {
 	}
 
 	public static void setX(int x) {
-
-		if (x % 50 > 34)
+//adjusting the location of the bomb to an exact grid
+		if (x % 50 > 34) //if the bomb is located almost to the next grid
 			x += 25;
-		while (x % 50 < 8)
+		while (x % 50 < 8) //if the bomb is located slightly before the start of a grid
 			x++;
-		while (x % 50 > 8)
+		while (x % 50 > 8)//if the bomb is located slightly over the start of a grid
 			x--;
 		Bomb.x = x;
 
-		explode1X = Bomb.x;
-		explode2X = Bomb.x - 58;
-		explode3X = Bomb.x;
-		explode4X = Bomb.x + 35;
-		explode5X = Bomb.x;
+		explode1X = Bomb.x;//center
+		explode2X = Bomb.x - 58;// left
+		explode3X = Bomb.x;//up
+		explode4X = Bomb.x + 35;//right
+		explode5X = Bomb.x;//down
 
 	}
 
@@ -75,7 +75,7 @@ public class Bomb {
 	}
 
 	public static void setY(int y) {
-
+//same as setX
 		if (y % 50 > 34)
 			y += 25;
 		while (y % 50 < 8)
