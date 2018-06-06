@@ -7,7 +7,7 @@ public class Enemy {
 	private int y = 100 * (int) (1 + Math.random() * 5) + 8;
 	private Image enemyRight = (new ImageIcon("enemyRight.gif")).getImage();
 	private Image enemyLeft = (new ImageIcon("enemyLeft.gif")).getImage();
-	private Image enemyDead = (new ImageIcon("enemyDead(1.5).gif")).getImage();
+	private Image enemyDead = (new ImageIcon("enemyDead.gif")).getImage();
 	private Image enemy = enemyRight;
 	private int direction = (int) (1 + Math.random() * 2);
 	private int speed = 3;
