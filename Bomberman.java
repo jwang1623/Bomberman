@@ -23,7 +23,7 @@ public class Bomberman extends JFrame implements ActionListener {
 
 	public Bomberman() {
 		for (int i = 0; i < enemy.length; i++)
-			enemy[i] = new Enemy();
+			enemy[i] = new Enemy(); //initialize two enemies
 		addKeyListener(new XListener());
 		add(new GamePanel());
 		time = new Timer(25, this);
@@ -73,7 +73,7 @@ public class Bomberman extends JFrame implements ActionListener {
     private static class ButtonClickListener implements ActionListener{
         public void actionPerformed(ActionEvent e) {
            String command = e.getActionCommand();
-           if (command.equals("Play")) {
+           if (command.equals("Play")) { //enters the game screen
                 Bomberman game = new Bomberman();
 				game.setTitle("Bomberman");
 				game.setSize(sizex, sizey);
@@ -109,13 +109,13 @@ public class Bomberman extends JFrame implements ActionListener {
 			super.paintComponent(g);
 
 			g.setFont(new Font("Helvetica", Font.BOLD, 80));
-			if (Player.meetDoor() && Enemy.allEnemiesDead(enemy)) {
+			if (Player.meetDoor() && Enemy.allEnemiesDead(enemy)) { //player won--> winning image
 				time.stop();
 				g.setColor(Color.BLACK);
 				g.drawImage(won, 0, 0, 755, 580, null);
 				return;
 			}
-			if (Player.isDead()) {
+			if (Player.isDead()) { //player lost--> losing message after 1 second
 				if (System.currentTimeMillis() - periodDead > 1000) {
 					time.stop();
 					g.setColor(Color.red);
@@ -127,10 +127,10 @@ public class Bomberman extends JFrame implements ActionListener {
 			}
 			g.drawImage(door, 700, 500, 50, 50, null);
 
-			if (Bomb.isExplode() && (System.currentTimeMillis() - periodExplode < 1000))
+			if (Bomb.isExplode() && (System.currentTimeMillis() - periodExplode < 1000)) //bomb explodes
 				Bomb.ExplodeEvent(g);
 
-			else if (Bomb.isBombSet()) {
+			else if (Bomb.isBombSet()) { //set bomb to explode after 3 seconds
 				g.drawImage(Bomb.getBomb(), Bomb.getX(), Bomb.getY(), 35, 35, null);
 				if (System.currentTimeMillis() - periodBomb > 3000) {
 					periodExplode = System.currentTimeMillis();
@@ -138,19 +138,18 @@ public class Bomberman extends JFrame implements ActionListener {
 					Bomb.off();
 				}
 			}
-
 			else
 				Bomb.setExplode(false);
 
 			g.drawImage(Player.getPlayer(), Player.getX(), Player.getY(), 35, 35, null);
 			for (int i = 0; i < enemy.length; i++) {
-				if ((enemy[i].isDead() && System.currentTimeMillis() - periodEnemyDead > 1200)) {
+				if ((enemy[i].isDead() && System.currentTimeMillis() - periodEnemyDead > 1200)) { //enemy off the screen
 					enemy[i].setX(1000);
 					enemy[i].setY(1000);
 				}
 				g.drawImage(enemy[i].getEnemy(), enemy[i].getX(), enemy[i].getY(), 35, 35, null);
 			}
-			for (int i = 0; i < 7; i++)
+			for (int i = 0; i < 7; i++) //sets the walls
 				for (int j = 0; j < 5; j++)
 					g.drawImage(wall, 50 * (2 * i + 1), 50 * (2 * j + 1), 50, 50, null);
 		}
