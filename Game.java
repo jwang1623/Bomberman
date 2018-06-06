@@ -13,6 +13,7 @@ public class Game extends JFrame implements ActionListener {
 	private Enemy[] enemy = new Enemy[2];
 	private Timer time;
 	private long periodBomb = 0, periodExplode = 0, periodEnemyDead = 0, periodDead = 0;
+	private Image won = (new ImageIcon("playerWon.gif")).getImage();
 
 	public Game() {
 		//System.out.println((int)(Math.ceil((1 + Math.random() * 1))));
@@ -47,8 +48,7 @@ public class Game extends JFrame implements ActionListener {
 			if (Player.meetDoor() && Enemy.allEnemiesDead(enemy)) {
 				time.stop();
 				g.setColor(Color.BLACK);
-				g.drawString("Well Done!!", getWidth() / 2 - 100,
-					getHeight() / 2 - 20);
+				g.drawImage(won, 0, 0, 755, 580, null);
 				return;
 			}
 			if (Player.isDead()) {
@@ -62,7 +62,7 @@ public class Game extends JFrame implements ActionListener {
 				Player.setPlayer(6);
 			}
 			g.drawImage(door, 700, 500, 50, 50, null);
-			
+
 			if (Bomb.isExplode() && (System.currentTimeMillis() - periodExplode < 1000))
 				Bomb.ExplodeEvent(g);
 
